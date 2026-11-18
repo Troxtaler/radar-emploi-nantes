@@ -1,0 +1,6 @@
+{
+  "updated_at": null,
+  "status": "not_configured",
+  "message": "La source Adzuna n'est pas encore configurée. Ajoute les deux secrets GitHub pour activer la collecte.",
+  "offers": []
+}
