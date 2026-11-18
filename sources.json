@@ -1,0 +1,5 @@
+{
+  "enable_adzuna": false,
+  "sources": [],
+  "_help": "Ajouter une source autorisée : {type:'greenhouse',name:'Entreprise',board_token:'slug'} ou {type:'lever',name:'Entreprise',site:'slug'} ou {type:'rss',name:'Flux',url:'https://...',company:'Entreprise',location:'Nantes'}. Vérifier l'autorisation de réutilisation des données. Ne jamais inclure de clés secrètes ici."
+}
