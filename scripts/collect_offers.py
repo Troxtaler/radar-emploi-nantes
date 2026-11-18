@@ -88,6 +88,14 @@ def adzuna(out):
 def main():
     config=json.loads(CONFIG.read_text(encoding="utf-8"))
     offers={};errors=[];active=0
+    # Garder la sélection manuelle existante tant que les annonces n’ont pas été vérifiées comme closes.
+    if DEST.exists():
+        try:
+            previous=json.loads(DEST.read_text(encoding="utf-8"))
+            for job in previous.get("offers",[]):
+                if str(job.get("id","")).startswith("selection-"):
+                    offers[job["id"]]=job
+        except (OSError,ValueError,KeyError):pass
     for source in config.get("sources",[]):
         if not source.get("enabled",True):continue
         active+=1
@@ -97,6 +105,9 @@ def main():
         try:
             if adzuna(offers):active+=1
         except Exception as exc:errors.append("Adzuna: "+str(exc)[:180])
+    if errors and active and not any(not k.startswith("selection-") for k in offers):
+        print("Collecte automatique en échec ; conservation des anciennes données : "+"; ".join(errors))
+        return
     if errors and not offers:
         print("Échec des sources ; conservation des anciennes données : "+"; ".join(errors))
         return
