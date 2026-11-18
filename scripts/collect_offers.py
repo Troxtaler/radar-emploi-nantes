@@ -101,7 +101,8 @@ def main():
         print("Échec des sources ; conservation des anciennes données : "+"; ".join(errors))
         return
     if not active:
-        status="not_configured";msg="Aucune source active. Configurez des flux publics d'entreprises dans sources.json."
+        print("Aucune source automatique configurée : conservation de la sélection existante.")
+        return
     else:
         status="partial" if errors else "ok"
         msg="Certaines sources sont indisponibles : "+"; ".join(errors) if errors else ""
